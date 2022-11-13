@@ -24,7 +24,7 @@
         android:id="@+id/call_me_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Call Me"
+        android:text="@string/call_me"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
