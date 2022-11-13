@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -38,17 +39,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPreferences = getSharedPreferences("night_theme", MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        if (sharedPreferences.contains("night_mode")) {
+        Resources res = getResources();
+        if (!res.getBoolean(R.bool.force_night_mode) && sharedPreferences.contains("night_mode")) {
             isNightMode = sharedPreferences.getBoolean("night_mode", false);
-            if (isNightMode) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
+        } else if (res.getBoolean(R.bool.force_night_mode)) {
+            isNightMode = res.getBoolean(R.bool.force_night_mode_state);
         } else {
-            isNightMode = (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+            isNightMode = (res.getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
             editor.putBoolean("night_mode", isNightMode);
             editor.commit();
+        }
+        if (isNightMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
         ir.webkhoon.cv.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());

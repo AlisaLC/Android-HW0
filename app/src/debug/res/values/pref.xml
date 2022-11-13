@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="force_night_mode">false</bool>
+    <bool name="force_night_mode_state">true</bool>
+</resources>
