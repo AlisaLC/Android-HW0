@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My CV</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="app_label">My CV</string>
+    <string name="my_name">Ali Salesi</string>
+</resources>
